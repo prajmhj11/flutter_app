@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/pages/Opportunities/opportunities_page.dart';
 import 'package:flutter_app/router/route_constants.dart';
 import 'package:flutter_app/router/router.dart';
@@ -11,16 +12,21 @@ void main() {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: brandingColor,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
       ),
-      home: OpportunitiesPage(),
-      onGenerateRoute: CustomRouter.onGenerateRoute,
-      initialRoute: signInRoute,
+      child: MaterialApp(
+        title: '',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: brandingColor,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: OpportunitiesPage(),
+        onGenerateRoute: CustomRouter.onGenerateRoute,
+        initialRoute: signInRoute,
+      ),
     );
   }
 }
