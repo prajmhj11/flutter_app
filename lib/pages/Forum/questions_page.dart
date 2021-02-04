@@ -11,6 +11,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text('Questions')),
+        automaticallyImplyLeading: false,
       ),
     );
   }

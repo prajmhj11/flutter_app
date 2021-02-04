@@ -11,6 +11,7 @@ class _FavouritiesPageState extends State<FavouritesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text('Favourities')),
+        automaticallyImplyLeading: false,
       ),
     );
   }
