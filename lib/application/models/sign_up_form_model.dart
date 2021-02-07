@@ -31,6 +31,12 @@ class SignUpFormModel {
   }
 
   void setPassword(String password) {
+    if (password != '') {
+      // password validation
+      if (password.length < 6) {
+        throw CommonErrors("Password must be of length 6 or more");
+      }
+    }
     this.password = password;
   }
 

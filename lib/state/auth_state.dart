@@ -28,4 +28,8 @@ class AuthState {
       passwordConfirmation: passwordConfirmation,
     );
   }
+
+  Future logOut() async {
+    await _authRepisotory.logOut();
+  }
 }

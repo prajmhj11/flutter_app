@@ -11,6 +11,7 @@ class Opportunity {
   final String deadline;
   final User createdBy;
   final String organizer;
+  final String image;
   final OpportunityDetail opportunityDetail;
   final String createdAt;
   final String updatedAt;
@@ -25,9 +26,11 @@ class Opportunity {
             ? Country.fromJson(jsonMap['country'])
             : null,
         deadline = jsonMap['deadline'] ?? "",
-        createdBy =
-            jsonMap['user'] != null ? User.fromJson(jsonMap['user']) : null,
+        createdBy = jsonMap['createdBy'] != null
+            ? User.fromJson(jsonMap['createdBy'])
+            : null,
         organizer = jsonMap['organizer'] ?? "",
+        image = jsonMap['image'] ?? "",
         opportunityDetail = jsonMap['opportunityDetail'] != null
             ? OpportunityDetail.fromJson(jsonMap['opportunityDetail'])
             : null,

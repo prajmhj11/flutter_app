@@ -17,6 +17,7 @@ abstract class AuthRepisotory {
     @required String password,
     @required String passwordConfirmation,
   });
+  Future logOut();
 }
 
 class AuthRepositoryImpl implements AuthRepisotory {
@@ -27,16 +28,17 @@ class AuthRepositoryImpl implements AuthRepisotory {
         "/api/auth/login",
         data: {"email": email, "password": password},
       );
+
       String accessToken = response.data['accessToken'];
       String tokenType = response.data['tokenType'];
       String expiresAt = response.data['expiresAt'];
-      print(accessToken);
-      print(tokenType);
-      print(expiresAt);
 
       await LocalStorage.setItem(TOKEN, accessToken);
       await LocalStorage.setItem(TOKEN_TYPE, tokenType);
       await LocalStorage.setItem(TOKEN_EXPIRATION, expiresAt);
+      await LocalStorage.setUser('user', response.data['user']);
+
+      print(response.data['user']);
 
       return;
     } on DioError catch (e) {
@@ -63,6 +65,23 @@ class AuthRepositoryImpl implements AuthRepisotory {
           "password": password,
           "password_confirmation": passwordConfirmation
         },
+      );
+      print(response);
+    } on DioError catch (e) {
+      print(e.response);
+      showNetworkError(e);
+    }
+  }
+
+  @override
+  Future logOut() async {
+    try {
+      var response = await AppApi.dio.post(
+        "/api/auth/logout",
+        options: Options(headers: {
+          'Authorization':
+              "${LocalStorage.getItem(TOKEN_TYPE)} ${LocalStorage.getItem(TOKEN)}"
+        }),
       );
       print(response);
     } on DioError catch (e) {

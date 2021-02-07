@@ -1,20 +1,27 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_app/application/app_api.dart';
+import 'package:flutter_app/application/classes/common/pagination.dart';
 import 'package:flutter_app/application/classes/errors/common_error.dart';
+import 'package:flutter_app/application/classes/opportunity/opportunities.dart';
 import 'package:flutter_app/application/classes/opportunity/opportunity.dart';
 import 'package:flutter_app/application/storage/local_storage.dart';
 import 'package:flutter_app/application/storage/storage_keys.dart';
 
 abstract class OpportunityRepository {
   // Fetch the opportunities
-  Future<List<Opportunity>> getAllOpportunities();
+  Future<Opportunities> getAllOpportunities([int page]);
 }
 
 class OpportunityRepositoryImpl implements OpportunityRepository {
   @override
-  Future<List<Opportunity>> getAllOpportunities() async {
+  Future<Opportunities> getAllOpportunities([int page = 1]) async {
     try {
-      final response = await AppApi.dio.get('/api/opportunity',
+      String url = '/api/opportunity';
+      if (page > 1) {
+        url = "/api/opportunity?page=" + page.toString();
+      }
+      print(url);
+      final response = await AppApi.dio.get(url,
           options: Options(
             headers: {
               'Authorization':
@@ -24,12 +31,16 @@ class OpportunityRepositoryImpl implements OpportunityRepository {
       List _temp = response.data['data'] ?? [];
       var _meta = response.data['meta'] ?? [];
 
-      print(_meta);
+      Pagination pagination = Pagination.fromJson(_meta);
+
       List<Opportunity> _opportunities = _temp
           .map((opportunity) => Opportunity.fromJson(opportunity))
           .toList();
-      // print(_opportunities);
-      return _opportunities;
+
+      return new Opportunities(
+        pagination: pagination,
+        opportunities: _opportunities,
+      );
     } on DioError catch (e) {
       print(e.response);
       // throw showNetworkError(e);

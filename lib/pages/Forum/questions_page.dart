@@ -13,6 +13,18 @@ class _QuestionsPageState extends State<QuestionsPage> {
         title: Center(child: Text('Questions')),
         automaticallyImplyLeading: false,
       ),
+      body: Container(
+        alignment: Alignment.center,
+        child: Center(
+          child: Text(
+            'No any question...',
+            style: TextStyle(
+              fontFamily: 'Dosis',
+              fontSize: 40,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

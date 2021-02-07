@@ -6,9 +6,4 @@ class AppApi {
 
   // For unauthenticated apis
   static Dio dio = new Dio(_baseOptions);
-
-  // Authenticated routes
-  static Dio dioAuth() {
-    return Dio();
-  }
 }

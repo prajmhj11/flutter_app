@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/Favourite/favourities_page.dart';
 import 'package:flutter_app/pages/Forum/questions_page.dart';
 import 'package:flutter_app/pages/Opportunities/opportunities_page.dart';
 import 'package:flutter_app/pages/auth/account_page.dart';
-import 'package:flutter_app/style/branding_color.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,8 +16,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _screens = [
     OpportunitiesPage(),
     QuestionsPage(),
-    FavouritesPage(),
-    AccountPage()
+    AccountPage(),
   ];
 
   // Selecte index
@@ -56,10 +53,6 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             label: 'Forums',
             icon: Icon(Icons.message),
-          ),
-          BottomNavigationBarItem(
-            label: 'Favourites',
-            icon: Icon(Icons.favorite),
           ),
           BottomNavigationBarItem(
             label: 'Accounts',

@@ -8,6 +8,7 @@ class CommonErrors extends Error {
 CommonErrors showNetworkError(DioError networkError) {
   String message = "";
 
+  print(networkError.response.statusCode);
   if (networkError.response != null) {
     if (networkError.response.statusCode == 401) {
       Map<String, dynamic> err = networkError.response.data;

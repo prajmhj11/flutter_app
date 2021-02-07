@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/Home/home_page.dart';
 import 'package:flutter_app/pages/Not%20found/not_found_page.dart';
 import 'package:flutter_app/pages/Opportunities/opportunities_page.dart';
+import 'package:flutter_app/pages/Opportunities/opportunity_detail.dart';
 import 'package:flutter_app/pages/auth/sign_in_page.dart';
 import 'package:flutter_app/pages/auth/sign_up_page.dart';
 import 'package:flutter_app/router/route_constants.dart';
@@ -12,7 +13,10 @@ class CustomRouter {
       case opportunitiesRoute:
         return MaterialPageRoute(builder: (_) => OpportunitiesPage());
       case opportunityDetailsRoute:
-        return MaterialPageRoute(builder: (_) => NotFoundPage());
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => OpportunityDetailPage(),
+        );
       case homeRoute:
         return MaterialPageRoute(builder: (_) => HomePage());
       case signInRoute:
